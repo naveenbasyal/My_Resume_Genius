@@ -3,8 +3,16 @@ import { useBasicInfo } from "../Context/StatesProvider";
 import logo from "../assets/logo.webp";
 
 const Preview = () => {
-  const { basicInfo, profile, experience, education, skills, image, color } =
-    useBasicInfo();
+  const {
+    basicInfo,
+    profile,
+    experience,
+    education,
+    skills,
+    image,
+    color,
+    newEducation,
+  } = useBasicInfo();
 
   return (
     <div
@@ -74,42 +82,47 @@ const Preview = () => {
         </p>
       </div>
       {/* --------Professional Expreience ------ */}
-      <div className="professional_experience">
-        <div className="professional_experience_header">
-          <h2
-            className="lib fw-bold"
-            style={{
-              fontSize: "1rem",
-              borderBottom: `2px solid ${color}`,
-              color: color,
-            }}
-          >
-            Professional Experience
-          </h2>
-          {experience.map((exp, id) => {
-            return (
-              <div key={id}>
-                <div className="row my-2">
-                  <div className="col-5 text-capitalize ms-2 text-muted" style={{fontWeight:"500"}}>
-                    {exp.position}
-                  </div>
-                  <div className="col-6 ">
-                    <div className="text-wrap d-flex flex-wrap text-muted text-capitalize">
-                      {exp.company} | {exp.startyear} - {exp.endyear}
+      {experience.length > 0 && (
+        <div className="professional_experience">
+          <div className="professional_experience_header">
+            <h2
+              className="lib fw-bold"
+              style={{
+                fontSize: "1rem",
+                borderBottom: `2px solid ${color}`,
+                color: color,
+              }}
+            >
+              Professional Experience
+            </h2>
+            {experience.map((exp, id) => {
+              return (
+                <div key={id}>
+                  <div className="row my-2">
+                    <div
+                      className="col-5 text-capitalize ms-2 text-muted"
+                      style={{ fontWeight: "500" }}
+                    >
+                      {exp.position}
+                    </div>
+                    <div className="col-6 ">
+                      <div className="text-wrap d-flex flex-wrap text-muted text-capitalize">
+                        {exp.company} | {exp.startyear} - {exp.endyear}
+                      </div>
                     </div>
                   </div>
+                  <div
+                    className="row d-flex flex-wrap text-wrap px-3 mb-3 text-capitalize"
+                    style={{ fontSize: ".8rem" }}
+                  >
+                    {exp.describe}
+                  </div>
                 </div>
-                <div
-                  className="row d-flex flex-wrap text-wrap px-3 mb-3 text-capitalize"
-                  style={{ fontSize: ".8rem" }}
-                >
-                  {exp.describe}
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
       {/* -----------Education --------------- */}
       <div className="education">
         <div className="education_header text-capitalize">
@@ -126,7 +139,12 @@ const Preview = () => {
           </h2>
           {/* School */}
           <div className="row mt-2">
-            <div className="col-2 center text-muted" style={{fontWeight:"500"}}>School</div>
+            <div
+              className="col-2 center text-muted"
+              style={{ fontWeight: "500" }}
+            >
+              School
+            </div>
             <div className="col-10">
               <span className="text-wrap d-flex flex-wrap text-muted ">
                 {education.schoolname} at {education.schoollocation} |{" "}
@@ -136,7 +154,12 @@ const Preview = () => {
           </div>
           {/* College */}
           <div className="row my-2">
-            <div className="col-2 center text-muted" style={{fontWeight:"500"}}>Degree</div>
+            <div
+              className="col-2 center text-muted"
+              style={{ fontWeight: "500" }}
+            >
+              Degree
+            </div>
             <div className="col-10">
               <span className="text-wrap d-flex flex-wrap text-muted ">
                 {education.degreename} in {education.degreefield} |{" "}
@@ -146,6 +169,35 @@ const Preview = () => {
           </div>
         </div>
       </div>
+      {/* -----------New Education --------------- */}
+
+      {newEducation.length > 0 && (
+        <>
+          {newEducation.map((edu, id) => {
+            return (
+              <div className="education" key={id}>
+                <div className="education_header text-capitalize">
+                  <div className="row mt-2">
+                    <div
+                      className="col-2 center text-muted"
+                      style={{ fontWeight: "500" }}
+                    >
+                      {edu.course}
+                    </div>
+                    <div className="col-10">
+                      <span className="text-wrap d-flex flex-wrap text-muted ">
+                        at {edu.institution} | {edu.startdate} -{" "}
+                        {edu.enddate}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </>
+      )}
+
       {/* ------- SKills -------- */}
       <div className="skills mt-3">
         <div className="skills_header">

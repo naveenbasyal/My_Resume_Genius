@@ -2,7 +2,15 @@ import React from "react";
 import { useBasicInfo } from "../Context/StatesProvider";
 
 const Education = ({ handleNext }) => {
-  const { education, seteducation, handlePrev } = useBasicInfo();
+  const {
+    education,
+    seteducation,
+    newEducation,
+    setNewEducation,
+    changeEducation,
+    addEducation,
+    deleteEducation,
+  } = useBasicInfo();
   return (
     <>
       <div className="education">
@@ -97,6 +105,7 @@ const Education = ({ handleNext }) => {
             </div>
           </div>
         </div>
+
         {/* -----College----- */}
 
         <div className="education_header">
@@ -173,7 +182,7 @@ const Education = ({ handleNext }) => {
                     });
                   }}
                   type="text"
-                value={education.degreeendyear}
+                  value={education.degreeendyear}
                   className="form-control"
                   id="degreeendyear"
                   name="degreeendyear"
@@ -184,7 +193,116 @@ const Education = ({ handleNext }) => {
             </div>
           </div>
         </div>
-       
+
+        {/* ----- additonal Courses----- */}
+
+        {newEducation.length > 0 && <h5>Additional Courses</h5>}
+        {newEducation.map((edu, index) => {
+          return (
+            <div className="education_header" key={index}>
+              <div className="row my-2 d-flex">
+                <div className=" d-flex justify-content-between">
+                  <div className="center text-muted">
+                    <h6>Course {index + 1}</h6>
+                  </div>
+                  <div>
+                    <button
+                      title={`Delete Course ${index + 1}`}
+                      onClick={() => {
+                        deleteEducation(index);
+                      }}
+                      className="button bgcolorful text-white px-3 shadow-btn pointer py-2"
+                    >
+                      <i className="fa-solid text-white pointer fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="row my-3">
+                <div className="col-lg-6 col-sm-12">
+                  <div className="form-floating mb-3">
+                    <input
+                      onChange={(e) => {
+                        changeEducation(e, index);
+                      }}
+                      type="text"
+                      value={edu.course}
+                      className="form-control"
+                      id="course"
+                      name="course"
+                      placeholder="Course"
+                    />
+
+                    <label htmlFor="course">Course</label>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-sm-12">
+                  <div className="form-floating mb-3">
+                    <input
+                      onChange={(e) => {
+                        changeEducation(e, index);
+                      }}
+                      type="text"
+                      value={edu.institution}
+                      className="form-control"
+                      id="institution"
+                      name="institution"
+                      placeholder="Institution"
+                    />
+                    <label htmlFor="institution">Institution</label>
+                  </div>
+                </div>
+              </div>
+              <div className="row my-3">
+                <div className="col-lg-6 col-sm-12">
+                  <div className="form-floating mb-3">
+                    <input
+                      onChange={(e) => {
+                        changeEducation(e, index);
+                      }}
+                      type="text"
+                      value={edu.startdate}
+                      className="form-control"
+                      id="startdate"
+                      name="startdate"
+                      placeholder="Start Date"
+                    />
+                    <label htmlFor="startdate">Start Date</label>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-sm-12">
+                  <div className="form-floating mb-3">
+                    <input
+                      onChange={(e) => {
+                        changeEducation(e, index);
+                      }}
+                      type="text"
+                      value={edu.enddate}
+                      className="form-control"
+                      id="enddate"
+                      name="enddate"
+                      placeholder="End Date"
+                    />
+                    <label htmlFor="enddate">End Date</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+        <div className="row my-3">
+          <div className="col-lg-6 col-sm-12">
+            <button
+              title="Add more courses"
+              onClick={() => {
+                addEducation();
+              }}
+              className="button bgcolorful text-white px-3 shadow-btn pointer py-2"
+            >
+              <i className="fa-solid text-white pointer fa-plus"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </>
   );

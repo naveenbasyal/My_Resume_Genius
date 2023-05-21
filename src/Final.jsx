@@ -1,8 +1,6 @@
 import React, { useRef, forwardRef, useState } from "react";
 import { useBasicInfo } from "./Context/StatesProvider";
 import { useNavigate } from "react-router-dom";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 import ReactToPrint from "react-to-print";
 
 const Preview = forwardRef((props, ref) => {

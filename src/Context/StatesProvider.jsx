@@ -49,6 +49,7 @@ const StatesProvider = ({ children }) => {
     };
     setexperience([...experience, newExperience]);
   };
+
   const deleteExperience = (index) => {
     const newExp = [...experience];
     newExp.splice(index, 1); // Use the splice method to remove the experience at the specified index
@@ -64,13 +65,41 @@ const StatesProvider = ({ children }) => {
   const [education, seteducation] = useState({
     schoolname: "St.Carmel School",
     schoollocation: "Ropar,Punjab",
-    degreename: "Bachelor of Arts",
-    degreefield: "Human Resources",
+    degreename: "B.Tech",
+    degreefield: "computer Science",
     schoolstartyear: "2012",
     schoolendyear: "2019",
     degreestartyear: "2015",
     degreeendyear: "2019",
   });
+
+  const [newEducation, setNewEducation] = useState([
+
+  ]);
+  const addEducation = () => {
+    const latestEducation = {
+      course: "",
+      institution: "",
+      startdate: "",
+      enddate: "",
+    };
+    setNewEducation([...newEducation, latestEducation]);
+  };
+  const deleteEducation = (index) => {
+    const latestEducation = [...newEducation];
+    latestEducation.splice(index, 1);
+    setNewEducation(latestEducation);
+  };
+
+  const changeEducation = (e, index) => {
+    const latestEducation = [...newEducation];
+    const updatedEducation = { ...latestEducation[index] };
+    updatedEducation[e.target.name] = e.target.value;
+
+    latestEducation[index] = updatedEducation;
+    setNewEducation(latestEducation);
+  };
+
   const [skills, setSkills] = useState([""]);
 
   const handleAddSkill = () => {
@@ -126,6 +155,11 @@ const StatesProvider = ({ children }) => {
           changeExperience,
           education,
           seteducation,
+          newEducation,
+          setNewEducation,
+          addEducation,
+          deleteEducation,
+          changeEducation,
           skills,
           setSkills,
           handleAddSkill,

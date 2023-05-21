@@ -10,8 +10,11 @@ const Experience = () => {
       {/* -----------Professional Experience-------- */}
       <div className="professional_experience">
         <div className="professional_experience_header px-3">
+
+          
           <h2 className="colorh">Professional Experience</h2>
           <p>Add your most recent job and continue in descending order.</p>
+          
           {experience.map((exp, index) => (
             <div key={index} className="row my-4 ">
               <div className="d-flex mb-3 align-items-center justify-content-between">
